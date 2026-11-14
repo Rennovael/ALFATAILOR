@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buat Pesanan – ALFA TAILOR</title>
+  <meta name="description" content="Isi formulir untuk memesan jahitan di ALFA TAILOR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigasi utama">
+      <a href="index.html#beranda" class="logo">ALFA <span>TAILOR</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#beranda">Beranda</a></li>
+        <li><a href="index.html#layanan">Layanan</a></li>
+        <li><a href="pesan.html" aria-current="page">Pesan</a></li>
+        <li><a href="buku-pesanan.html">Buku Pesanan</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="pesan" class="container section">
+      <h1>Buat pesanan</h1>
+      <p class="section-sub">Kolom bertanda * wajib diisi. Ukuran boleh dikosongkan kalau kamu ingin diukur langsung.</p>
+
+      <form id="orderForm" class="form" novalidate>
+        <fieldset>
+          <legend>Data pemesan</legend>
+          <div class="field"><label for="nama">Nama *</label><input id="nama" type="text" autocomplete="name" placeholder="Nama lengkap"></div>
+          <div class="field"><label for="wa">No. WhatsApp *</label><input id="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Jahitan</legend>
+          <div class="field"><label for="layanan-select">Jenis jahitan *</label><select id="layanan-select"><option value="">Pilih jenis jahitan</option></select></div>
+          <div class="field"><label for="jumlah">Jumlah (potong)</label><input id="jumlah" type="number" min="1" max="200" value="1"></div>
+          <div class="field"><label for="tanggal">Dibutuhkan tanggal *</label><input id="tanggal" type="date"></div>
+          <div class="field"><label for="catatan">Catatan model / bahan</label><textarea id="catatan" rows="3" placeholder="Contoh: model A-line, bahan dari pelanggan, ada kancing depan"></textarea></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Ukuran badan (cm)</legend>
+          <div class="measure-grid">
+            <div class="field"><label for="m-dada">Lingkar dada</label><input id="m-dada" type="number" min="0" step="0.5"></div>
+            <div class="field"><label for="m-pinggang">Lingkar pinggang</label><input id="m-pinggang" type="number" min="0" step="0.5"></div>
+            <div class="field"><label for="m-pinggul">Lingkar pinggul</label><input id="m-pinggul" type="number" min="0" step="0.5"></div>
+            <div class="field"><label for="m-panjang">Panjang baju</label><input id="m-panjang" type="number" min="0" step="0.5"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Alamat (opsional, jika ingin diantar)</legend>
+          <div class="field"><label for="prov">Provinsi</label><select id="prov"><option value="">Memuat...</option></select></div>
+          <div class="field"><label for="kab">Kabupaten / Kota</label><select id="kab" disabled><option value="">Pilih provinsi dulu</option></select></div>
+          <div class="field"><label for="kec">Kecamatan</label><select id="kec" disabled><option value="">Pilih kabupaten dulu</option></select></div>
+          <div class="field"><label for="alamat">Alamat lengkap</label><textarea id="alamat" rows="2" placeholder="Nama jalan, nomor rumah, RT/RW"></textarea></div>
+        </fieldset>
+
+        <div class="estimate"><p>Perkiraan biaya mulai dari</p><strong id="estimate">Rp 0</strong></div>
+        <p id="formError" class="form-error" role="alert"></p>
+        <button type="submit" class="btn btn-block">Buat pesanan</button>
+      </form>
+
+      <div id="formResult" class="result" role="status" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="logo">ALFA <span>TAILOR</span></p>
+      <p><small>Alamat wilayah dari <a href="https://github.com/emsifa/api-wilayah-indonesia" target="_blank" rel="noopener">API Wilayah Indonesia</a>.</small></p>
+    </div>
+  </footer>
+
+  <script src="js/wilayah-data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
