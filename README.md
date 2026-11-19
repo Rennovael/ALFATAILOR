@@ -9,6 +9,34 @@ Website jasa jahit dengan tiga halaman, formulir pemesanan, dan buku pesanan.
 - `js/script.js`: interaksi layanan, form, API wilayah, dan buku pesanan
 - API publik: [API Wilayah Indonesia](https://github.com/emsifa/api-wilayah-indonesia), tanpa API key
 
+## Dokumentasi Tampilan
+
+Screenshot berikut memperlihatkan halaman utama, proses pemesanan, data wilayah dari API, dan buku pesanan. Nama, nomor WhatsApp, ukuran badan, dan alamat pribadi pada gambar sudah disamarkan.
+
+### Beranda
+
+![Beranda ALFA TAILOR](screenshots/01-beranda.png)
+
+### Cara pesan
+
+![Langkah pemesanan](screenshots/02-cara-pesan.png)
+
+### Formulir pesanan
+
+![Formulir pesanan](screenshots/03-form-pemesanan.png)
+
+### Ukuran badan
+
+![Bagian ukuran badan pada formulir](screenshots/04-form-detail.png)
+
+### Pilihan wilayah dari API
+
+![Pilihan provinsi, kabupaten, dan kecamatan](screenshots/05-api-wilayah.png)
+
+### Buku pesanan
+
+![Ringkasan dan daftar pesanan](screenshots/06-buku-pesanan.png)
+
 ## Konfigurasi
 
 Buka bagian `KONFIGURASI` di `js/script.js` untuk mengubah:
