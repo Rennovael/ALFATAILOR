@@ -55,26 +55,34 @@ function saveOrders(list) {
 
 /* ========== Layanan ========== */
 function renderServices() {
-    $('serviceGrid').replaceChildren(...LAYANAN.map(l => {
-        const card = el('article', 'service');
-        const price = el('p', 'price');
-        price.append(document.createTextNode(rupiah(l.harga) + ' '), el('small', '', '/ potong, mulai dari'));
-        card.append(el('div', 'icon', l.ikon), el('h3', '', l.nama), el('p', '', l.desc), price);
-        return card;
-    }));
+    const grid = $('serviceGrid');
+    if (grid) {
+        grid.replaceChildren(...LAYANAN.map(l => {
+            const card = el('article', 'service');
+            const price = el('p', 'price');
+            price.append(document.createTextNode(rupiah(l.harga) + ' '), el('small', '', '/ potong, mulai dari'));
+            card.append(el('div', 'icon', l.ikon), el('h3', '', l.nama), el('p', '', l.desc), price);
+            return card;
+        }));
+    }
 
     const select = $('layanan-select');
-    LAYANAN.forEach(l => {
-        const opt = el('option', '', `${l.nama} (mulai ${rupiah(l.harga)})`);
-        opt.value = l.id;
-        select.append(opt);
-    });
+    if (select) {
+        LAYANAN.forEach(l => {
+            const opt = el('option', '', `${l.nama} (mulai ${rupiah(l.harga)})`);
+            opt.value = l.id;
+            select.append(opt);
+        });
+    }
 }
 
 function updateEstimate() {
-    const l = findLayanan($('layanan-select').value);
+    const estimate = $('estimate');
+    const select = $('layanan-select');
+    if (!estimate || !select) return;
+    const l = findLayanan(select.value);
     const qty = Math.max(1, parseInt($('jumlah').value, 10) || 1);
-    $('estimate').textContent = rupiah(l ? l.harga * qty : 0);
+    estimate.textContent = rupiah(l ? l.harga * qty : 0);
 }
 
 /* ========== API Wilayah Indonesia ========== */
@@ -127,6 +135,7 @@ async function initWilayah() {
     const prov = $('prov'),
         kab = $('kab'),
         kec = $('kec');
+    if (!prov || !kab || !kec) return;
     const gagal = 'Gagal memuat (tulis di alamat lengkap)';
 
     prov.addEventListener('change', async() => {
@@ -182,7 +191,8 @@ function showResult(order) {
     box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-$('orderForm').addEventListener('submit', e => {
+const orderForm = $('orderForm');
+if (orderForm) orderForm.addEventListener('submit', e => {
     e.preventDefault();
     const err = $('formError');
     const nama = $('nama').value.trim();
@@ -228,7 +238,10 @@ $('orderForm').addEventListener('submit', e => {
     updateEstimate();
 });
 
-['layanan-select', 'jumlah'].forEach(id => $(id).addEventListener('input', updateEstimate));
+['layanan-select', 'jumlah'].forEach(id => {
+    const input = $(id);
+    if (input) input.addEventListener('input', updateEstimate);
+});
 
 /* ========== Buku pesanan ========== */
 const isActive = o => o.status === 'Baru' || o.status === 'Dijahit';
@@ -333,6 +346,7 @@ function orderCard(o) {
 }
 
 function renderOrders() {
+    if (!$('stats') || !$('filters') || !$('orders')) return;
     const all = loadOrders();
     renderStats(all);
     renderFilters(all);
@@ -350,7 +364,8 @@ function renderOrders() {
 }
 
 /* ========== Mulai ========== */
-$('tanggal').min = todayISO();
+const dateInput = $('tanggal');
+if (dateInput) dateInput.min = todayISO();
 renderServices();
 updateEstimate();
 renderOrders();
